@@ -4,6 +4,12 @@
 
 **Infrastructure as a Service (IaaS)**
 
+*Components of IaaS*
+
+  - Web Tier
+  - App Tier
+
+
 *Tech Stack*
   - Java
       - Spring
