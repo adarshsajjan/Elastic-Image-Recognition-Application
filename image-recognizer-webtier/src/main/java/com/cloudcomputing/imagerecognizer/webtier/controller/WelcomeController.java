@@ -1,24 +1,26 @@
 package com.cloudcomputing.imagerecognizer.webtier.controller;
 
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
-import org.springframework.web.multipart.MultipartFile;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
+import java.util.concurrent.atomic.AtomicInteger;
+
+@Slf4j
 @RestController
 @RequestMapping("/")
 public class WelcomeController {
 
+    private static final AtomicInteger atomicInteger = new AtomicInteger(0);
+
+    @Value("${aws.s3.input.bucket.name}")
+    private String bucketName;
+
     @GetMapping("cc")
     public String welcome() {
-        return "Welcome to Cloud Computing Project 1 - Image Recognition Service!";
+        log.info("received a request..." + atomicInteger.incrementAndGet());
+        return "Welcome to Cloud Computing Project 1 - Image Recognition Service!   " + bucketName;
     }
-
-    @PostMapping("/upload")
-    public ResponseEntity<String> uploadImage(@RequestParam(name = "fileName") MultipartFile multipartFile) {
-
-
-        return null;
-    }
-
-
 }
