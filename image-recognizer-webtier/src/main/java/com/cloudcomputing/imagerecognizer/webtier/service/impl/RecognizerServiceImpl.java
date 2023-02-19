@@ -20,16 +20,16 @@ public class RecognizerServiceImpl implements RecognizerService {
     @Autowired
     private SQSService sqsService;
 
-    @Value("${aws.sqs.input.queue.name}")
-    private String queueName;
+    @Value("${aws.sqs.request.queue.name}")
+    private String requestQueueName;
 
-    @Value("${aws.sqs.input.queue.delay}")
+    @Value("${aws.sqs.request.queue.delay}")
     private String delay;
 
     @Override
     public void uploadImage(MultipartFile multipartFile, String fileName) throws Exception {
         File uploadedFile = FileUtils.convertToFile(multipartFile);
         s3Service.uploadFile(uploadedFile, fileName);
-        sqsService.pushToQueue(fileName, queueName, Integer.valueOf(delay));
+        sqsService.pushToQueue(fileName, requestQueueName, Integer.valueOf(delay));
     }
 }
