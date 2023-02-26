@@ -1,5 +1,6 @@
 package com.cloudcomputing.imagerecognizer.webtier.aws;
 
+import com.amazonaws.ClientConfiguration;
 import com.amazonaws.auth.AWSCredentials;
 import com.amazonaws.auth.AWSStaticCredentialsProvider;
 import com.amazonaws.auth.BasicAWSCredentials;
@@ -25,6 +26,12 @@ public class AwsConfig {
     @Value("${aws.region}")
     private String region;
 
+    @Value("${aws.sqs.response.queue.name}")
+    public String responseQueue;
+
+    @Value("${aws.sqs.request.queue.name}")
+    public String requestQueue;
+
     private AmazonS3 s3Client;
 
     private AmazonSQS sqsClient;
@@ -37,8 +44,9 @@ public class AwsConfig {
                         .withCredentials(new AWSStaticCredentialsProvider(basicCredentials))
                         .withRegion(Regions.US_EAST_1)
                         .build();
-
+        ClientConfiguration clientConfiguration = new ClientConfiguration();
         sqsClient = AmazonSQSClientBuilder.standard()
+                .withClientConfiguration(clientConfiguration.withMaxConnections(130))
                         .withCredentials(new AWSStaticCredentialsProvider(basicCredentials))
                         .withRegion(Regions.US_EAST_1)
                         .build();
