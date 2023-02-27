@@ -15,12 +15,9 @@ public class WelcomeController {
 
     private static final AtomicInteger atomicInteger = new AtomicInteger(0);
 
-    @Value("${aws.s3.input.bucket.name}")
-    private String bucketName;
-
     @GetMapping("cc")
     public String welcome() {
         log.info("received a request..." + atomicInteger.incrementAndGet());
-        return "Welcome to Cloud Computing Project 1 - Image Recognition Service!   " + bucketName;
+        return "Welcome to Cloud Computing Project 1 - Image Recognition Service!   "  + atomicInteger.get();
     }
 }

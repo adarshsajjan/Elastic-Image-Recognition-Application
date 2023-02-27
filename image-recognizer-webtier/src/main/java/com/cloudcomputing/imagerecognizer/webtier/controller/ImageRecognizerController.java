@@ -39,8 +39,7 @@ public class ImageRecognizerController {
         ResponseEntity<String> responseEntity;
         try{
             log.info("received a request to upload a file to s3: {}", multipartFile.getOriginalFilename());
-            String fileName = multipartFile.getOriginalFilename() + "_" + System.currentTimeMillis();
-//            String fileName = multipartFile.getOriginalFilename();
+            String fileName = multipartFile.getOriginalFilename();
             recognizerService.uploadImage(multipartFile, fileName);
 
             while(true) {
