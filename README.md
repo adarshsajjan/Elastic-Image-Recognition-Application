@@ -1,7 +1,5 @@
 # Cloud Computing
 
-<img width="995" alt="Screenshot 2023-02-17 at 2 01 23 AM" src="https://user-images.githubusercontent.com/51116946/219600956-44c2836c-0115-4390-9e80-6cd8544dae51.png">
-
 **Project - 1**
 
 **Infrastructure as a Service (IaaS)**
@@ -15,6 +13,8 @@
 *Tech Stack*
   - Java
       - Spring
+  - Python
+      - boto3
   - AWS Services
       - EC2
       - SQS
